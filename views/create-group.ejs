@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Create Group</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
+    <div class="container">
+        <h1>Create New Group</h1>
 
-<h1>Create New Group</h1>
+        <form method="POST" action="/groups/create">
 
-<form method="POST" action="/groups/create">
+            <div>
+                <label>Group Name:</label>
+                <input type="text" name="group_name" required>
+            </div>
 
-    <div>
-        <label>Group Name:</label>
-        <input type="text" name="group_name" required>
+            <h3>Select Members:</h3>
+
+            <% users.forEach(user=> { %>
+                <div>
+                    <input type="checkbox" name="members" value="<%= user.user_id %>">
+                    <%= user.username %>
+                </div>
+                <% }) %>
+
+                    <br>
+
+                    <button type="submit">Create Group</button>
+        </form>
+
+        <a href="/groups">Back</a>
     </div>
-
-    <h3>Select Members:</h3>
-
-    <% users.forEach(user => { %>
-        <div>
-            <input type="checkbox" name="members" value="<%= user.user_id %>">
-            <%= user.username %>
-        </div>
-    <% }) %>
-
-    <br>
-
-    <button type="submit">Create Group</button>
-</form>
-
-<a href="/groups">Back</a>
-
 </body>
+
 </html>

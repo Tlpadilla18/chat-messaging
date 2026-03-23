@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Groups</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
+    <div class="container">
+        <h1>Welcome <%= user.username %>
+        </h1>
 
-<h1>Welcome <%= user.username %></h1>
+        <form method="POST" action="/logout">
+            <button type="submit">Logout</button>
+        </form>
 
-<form method="POST" action="/logout">
-    <button type="submit">Logout</button>
-</form>
+        <h2>Your Groups (<%= total %>)</h2>
 
-<h2>Your Groups (<%= total %>)</h2>
+        <ul>
+            <% groups.forEach(group=> { %>
+                <li>
+                    <strong>
+                        <%= group.group_name %>
+                    </strong><br>
 
-<ul>
-    <% groups.forEach(group => { %>
-        <li>
-            <strong><%= group.group_name %></strong><br>
+                    Last message:
+                    <%= group.last_message_time ? group.last_message_time : "No messages yet" %><br>
 
-            Last message:
-            <%= group.last_message_time ? group.last_message_time : "No messages yet" %><br>
+                        Unread:
+                        <%= group.unread_count %><br>
 
-            Unread:
-            <%= group.unread_count %><br>
+                            <a href="/groups/<%= group.group_id %>">Open Chat</a>
+                </li>
+                <hr>
+                <% }) %>
+        </ul>
 
-            <a href="/groups/<%= group.group_id %>">Open Chat</a>
-        </li>
-        <hr>
-    <% }) %>
-</ul>
-
-<a href="/groups/create">Create New Group</a>
-
+        <a href="/groups/create">Create New Group</a>
+    </div>
 </body>
+
 </html>
