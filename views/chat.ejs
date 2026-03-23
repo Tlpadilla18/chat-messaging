@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+</head>
+<body>
+
+<h1>Chat</h1>
+
+<a href="/groups">← Back to Groups</a>
+
+<hr>
+
+<div>
+    <% messages.forEach(msg => { %>
+        <p>
+            <strong><%= msg.username %></strong>:
+            <%= msg.message_text %><br>
+            <small><%= msg.sent_at %></small>
+        </p>
+
+        <!-- SHOW EMOJIS -->
+        <div>
+            <% msg.reactions.forEach(r => { %>
+                <span><%= r.emoji %></span>
+            <% }) %>
+        </div>
+
+        <!-- ADD EMOJI -->
+        <form method="POST" action="/messages/<%= msg.message_id %>/react">
+            <input type="hidden" name="groupId" value="<%= groupId %>">
+
+            <button name="emoji" value="👍">👍</button>
+            <button name="emoji" value="❤️">❤️</button>
+            <button name="emoji" value="😂">😂</button>
+        </form>
+
+        <hr>
+    <% }) %>
+</div>
+
+<form method="POST" action="/groups/<%= groupId %>/message">
+    <input type="text" name="message" placeholder="Type a message..." required>
+    <button type="submit">Send</button>
+</form>
+
+</body>
+</html>

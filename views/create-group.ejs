@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Group</title>
+</head>
+<body>
+
+<h1>Create New Group</h1>
+
+<form method="POST" action="/groups/create">
+
+    <div>
+        <label>Group Name:</label>
+        <input type="text" name="group_name" required>
+    </div>
+
+    <h3>Select Members:</h3>
+
+    <% users.forEach(user => { %>
+        <div>
+            <input type="checkbox" name="members" value="<%= user.user_id %>">
+            <%= user.username %>
+        </div>
+    <% }) %>
+
+    <br>
+
+    <button type="submit">Create Group</button>
+</form>
+
+<a href="/groups">Back</a>
+
+</body>
+</html>

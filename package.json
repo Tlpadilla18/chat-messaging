@@ -1,0 +1,21 @@
+{
+  "name": "chat-messaging",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-mongo": "^6.0.0",
+    "dotenv": "^17.3.1",
+    "ejs": "^5.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mongodb": "^7.1.0",
+    "nodemon": "^3.1.14",
+    "pg": "^8.20.0"
+  }
+}
