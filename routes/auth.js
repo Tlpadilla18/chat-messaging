@@ -46,9 +46,9 @@ router.post('/signup', async (req, res) => {
 
         res.redirect('/login');
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Server error during signup.');
-    }
+    console.error('SIGNUP ERROR:', error);
+    res.status(500).send('Server error during signup.');
+}
 });
 
 router.get('/login', (req, res) => {
@@ -87,9 +87,9 @@ router.post('/login', async (req, res) => {
 
         res.redirect('/groups');
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Server error during login.');
-    }
+    console.error('LOGIN ERROR:', error);
+    res.status(500).send('Server error during login.');
+}
 });
 
 router.post('/logout', (req, res) => {
