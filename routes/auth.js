@@ -59,6 +59,9 @@ router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
 
+        console.log('LOGIN ATTEMPT USERNAME:', username);
+        console.log('HAS DATABASE URL:', !!process.env.DATABASE_URL);
+
         if (!username || !password) {
             return res.render('login', { error: 'All fields are required.' });
         }
@@ -68,13 +71,17 @@ router.post('/login', async (req, res) => {
             [username]
         );
 
+        console.log('LOGIN QUERY ROW COUNT:', result.rows.length);
+
         if (result.rows.length === 0) {
             return res.render('login', { error: 'Invalid username or password.' });
         }
 
         const user = result.rows[0];
+        console.log('FOUND USER:', user.username);
 
         const match = await bcrypt.compare(password, user.password_hash);
+        console.log('PASSWORD MATCH:', match);
 
         if (!match) {
             return res.render('login', { error: 'Invalid username or password.' });
@@ -87,9 +94,9 @@ router.post('/login', async (req, res) => {
 
         res.redirect('/groups');
     } catch (error) {
-    console.error('LOGIN ERROR:', error);
-    res.status(500).send('Server error during login.');
-}
+        console.error('LOGIN ERROR FULL:', error);
+        res.status(500).send('Server error during login.');
+    }
 });
 
 router.post('/logout', (req, res) => {
