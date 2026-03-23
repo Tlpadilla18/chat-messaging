@@ -47,18 +47,6 @@ app.get('/', (req, res) => {
     res.redirect('/login');
 });
 
-const pool = require('./db/connection');
-
-app.get('/test-db', async (req, res) => {
-    try {
-        const result = await pool.query('SELECT NOW()');
-        res.json(result.rows);
-    } catch (error) {
-        console.error('TEST DB ERROR:', error);
-        res.status(500).send('DB connection failed');
-    }
-});
-
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
